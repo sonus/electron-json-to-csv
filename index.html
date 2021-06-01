@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <title>JSON to CSV</title>
+  <!-- CSS only -->
+  <link rel="stylesheet" href="style/style.css">
+
+</head>
+
+<body>
+  <div class="card">
+    <h5 class="card-header">JSON to CSV</h5>
+    <div class="card-body">
+      <h5 class="card-title">Select your Json file</h5>
+      <p class="card-text" id="file_path">No JSON file selected.</p>
+      <button class="btn btn-primary" type="button" id="upload">Select JSON File</button>
+    </div>
+    <div id="header_body" class=" invisible">
+      <div class="card-body">
+        <h5 class="card-title">Select headers</h5>
+        <div id="headers" class="row">
+          <div class="col">
+            <select class="custom-select" multiple id="headers_select"></select>
+          </div>
+          <div class="col">
+            <textarea name="" id="text_selected" cols="32" rows="4" disabled></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-muted">
+        <h5 class="card-title">Save CSV file to </h5>
+        <p class="card-text" id="csv_file_path">No JSON file selected.</p>
+        <button class="btn btn-success" type="button" id="convert">Convert to CSV</button>
+      </div>
+    </div>
+  </div>
+  <!-- You can also require other files to run in this process -->
+  <script src="./renderer.js"></script>
+</body>
+
+</html>
