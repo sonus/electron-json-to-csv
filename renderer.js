@@ -82,7 +82,7 @@ newSelect.addEventListener("change", function () {
 });
 
 function setCSVfilePath(path) {
-    csv_path = path.replace(/.json/gi, "_" + getFormattedTime() + ".csv");
+    csv_path = path.substring(0, path.length - 5) + getFormattedTime() + ".csv";
     csvPath.innerText = csv_path;
 }
 

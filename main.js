@@ -6,6 +6,7 @@ const path = require('path')
 const os = require('os')
 const fs = require('fs');
 const { readFile, writeFile } = require('fs').promises;
+const jsonexport = require('jsonexport');
 let json_data = {};
 let result_data = {};
 
@@ -80,13 +81,29 @@ ipc.on('open-file-dialog', function (event) {
 
 ipc.on('selected_header', function (event, result) {
   result_data = result;
-  (async () => {
-    const data = await parseJSONFile(result.jsonPath);
-    const CSV = arrayToCSV(data, result.selected_headers);
-    await writeCSV(result.csvPath, CSV);
-    // console.log(`Successfully converted ${result.csvPath}!`);
-    event.sender.send('coverstion-completed', { path: 1 })
-  })();
+
+  const reader = fs.createReadStream(result.jsonPath);
+  const writer = fs.createWriteStream(result.csvPath);
+
+  reader.pipe(jsonexport()).pipe(writer);
+
+  // let rawdata1 = fs.readFileSync(result.jsonPath);
+  // const json = JSON.parse(rawdata1);
+  // var xls = json2xls(json);
+  // fs.writeFileSync(result.csvPath +".xlsx", xls, 'binary');
+
+
+
+
+  event.sender.send('coverstion-completed', { path: 1 })
+
+  // (async () => {
+  //   const data = await parseJSONFile(result.jsonPath);
+  //   const CSV = arrayToCSV(data, result.selected_headers);
+  //   await writeCSV(result.csvPath, CSV);
+  //   // console.log(`Successfully converted ${result.csvPath}!`);
+  //   event.sender.send('coverstion-completed', { path: 1 })
+  // })();
 })
 
 

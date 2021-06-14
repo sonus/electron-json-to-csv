@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "description": "electron app for converting json to csv",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "copyright": "Sonus.Xyz",
   "author": {
     "name": "Sonus Sundar",
@@ -12,7 +12,12 @@
     "website": "https://sonus.xyz"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder",
+    "window": "electron-builder --windows nsis:ia32",
+    "build-all": "electron-builder -mwl",
+    "build-pub": "electron-builder --publish",
+    "publish": "build --mac --win -p always"
   },
   "repository": "https://github.com/sonus/electron-json-to-csv",
   "keywords": [
@@ -24,9 +29,32 @@
     "json2csv"
   ],
   "devDependencies": {
-    "electron": "^12.0.7"
+    "electron": "^12.0.7",
+    "electron-builder": "^22.11.7"
   },
   "dependencies": {
-    "fs": "^0.0.1-security"
+    "electron-updater": "^4.3.9",
+    "fs": "^0.0.1-security",
+    "jsonexport": "^3.2.0"
+  },
+  "build": {
+    "appId": "com.sonus.jsontocsv",
+    "productName": "JSON to CSV",
+    "directories": {
+      "output": "build"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "sonus",
+        "repo": "electron-json-to-csv"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "verifyUpdateCodeSignature": false
+    }
   }
 }
