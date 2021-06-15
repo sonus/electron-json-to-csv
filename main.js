@@ -62,7 +62,7 @@ app.on('window-all-closed', function () {
 ipc.on('open-file-dialog', function (event) {
   dialog.showOpenDialog({
     title: 'Select Json File',
-    properties: ['openFile', 'openDirectory'],
+    properties: ['openFile'],
     filters: [
       { name: 'Json', extensions: ['json'] },
     ]
